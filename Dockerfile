@@ -1,11 +1,12 @@
 FROM php:8.2-fpm
 
-# Install important PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+# Install dependencies and PHP extensions
+RUN apt-get update && apt-get install -y \
+    default-mysql-client \
+    && docker-php-ext-install pdo pdo_mysql mysqli
 
-# Copy project files
+# Set working directory
 WORKDIR /var/www/html
-COPY ./src /var/www/html
 
-# Permissions
-RUN chown -R www-data:www-data /var/www/html
+# Expose PHP-FPM port
+EXPOSE 9000

@@ -1,28 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require_once __DIR__ . "/includes/config.php";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-table, tbody , tr, td{
-    border: 1px solid black;
-}
-</style>
+echo "<h1>Docker PHP + Nginx + MySQL Works!</h1>";
 
-<body>
+$result = $conn->query("SELECT 'Connected to MySQL!' AS msg");
 
-    <table>
-        <tbody>
-        <?php
-        for($i=0; $i<5; $i++){
-            echo"<tr><td>Section $i</td></tr>";
-        }
-        ?>
-        </tbody>
-    </table>
-</body>
-
-</html>
+$row = $result->fetch_assoc();
+echo "<p>" . $row['msg'] . "</p>";
+?>
