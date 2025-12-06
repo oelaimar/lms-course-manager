@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "rootDir": "./src/assets/ts",
+    "outDir": "./src/assets/js",
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "sourceMap": false,
+    "declaration": false,
+    "strict": true
+  },
+}

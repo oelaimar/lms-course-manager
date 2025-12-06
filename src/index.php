@@ -1,11 +1,3 @@
 <?php
-require_once __DIR__ . "/includes/config.php";
-?>
-
-<?php
-require_once __DIR__ . "/includes/header.php";
-?>
-
-<?php
-require_once __DIR__ . "/includes/footer.php";
+require_once __DIR__ . "/courses_list.php";
 ?>
