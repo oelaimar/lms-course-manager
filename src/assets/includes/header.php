@@ -20,7 +20,7 @@ session_start();
             </div>
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="#" onclick="goToPage('courses')">Courses</a></li>
+                    <li><a href="#">Courses</a></li>
                     <li><a href="#">Students</a></li>
                     <li><a href="#">Reports</a></li>
                     <li><a href="#">Settings</a></li>

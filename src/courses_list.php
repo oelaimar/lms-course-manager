@@ -1,6 +1,18 @@
 <?php
 require_once __DIR__ . "/assets/includes/header.php";
 ?>
+<?php
+$success = $_GET['success'] ?? null;
+?>
+<?php if ($success === "1"): ?>
+    <div id="alert-box" style="padding:10px; background:#d4edda; color:#155724; border-radius:5px; margin-bottom:15px; text-align:center;">
+        Course created successfully 🎉
+    </div>
+<?php elseif ($success === "0"): ?>
+    <div id="alert-box" style="padding:10px; background:#f8d7da; color:#721c24; border-radius:5px; margin-bottom:15px; text-align:center;">
+        Failed to create course. (Shocking, I know.)
+    </div>
+<?php endif; ?>
 
 <?php
 $sql = "SELECT * FROM courses ORDER BY created_at DESC";
@@ -68,32 +80,35 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
 <div id="courseModal" class="modal-overlay" onclick="closeModal('courseModal')">
     <div class="modal" onclick="event.stopPropagation()">
         <div class="modal-header">
-            <h2 class="modal-title">Add New Course</h2>
+            <h2 id="modal-title" class="modal-title">Add New Course</h2>
             <button class="close-modal" onclick="closeModal('courseModal')">
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <form action="courses_create.php" method="POST">
+        <form id="courseForum" action="courses_create.php" method="POST">
             <div class="form-group">
+                <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorCourseTitle"></span>
                 <label class="form-label">Course Title</label>
-                <input type="text" class="form-input" name="title" placeholder="e.g., Introduction to Python Programming">
+                <input id="courseTitle" type="text" class="form-input" name="title" placeholder="e.g., Introduction to Python Programming">
             </div>
             <div class="form-group">
+                <span style="color: #d9534f; font-size: 16px; background-color: #f2dede" id="errorCourseDescription"></span>
                 <label class="form-label">Description</label>
-                <textarea class="form-textarea" name="description" placeholder="Describe what students will learn in this course..."></textarea>
+                <textarea id="courseDescription" class="form-textarea" name="description" placeholder="Describe what students will learn in this course..."></textarea>
             </div>
             <div class="form-group">
+                <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorCoursLevel"></span>
                 <label class="form-label">Level</label>
-                <select class="form-select" name="level">
+                <select id="coursLevel" class="form-select" name="level">
                     <option value="">Select level...</option>
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
                 </select>
             </div>
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" onclick="closeModal('courseModal')">Cancel</button>
-                <button type="submit" class="btn btn-primary">Create Course</button>
+                <button id="submitBtn" type="submit" class="btn btn-primary">Create Course</button>
             </div>
         </form>
     </div>
