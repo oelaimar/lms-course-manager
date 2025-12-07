@@ -8,6 +8,10 @@ $success = $_GET['success'] ?? null;
     <div id="alert-box" style="padding:10px; background:#d4edda; color:#155724; border-radius:5px; margin-bottom:15px; text-align:center;">
         Course created successfully 🎉
     </div>
+<?php elseif ($success === "2"): ?>
+    <div id="alert-box" style="padding:10px; background:#d4edda; color:#155724; border-radius:5px; margin-bottom:15px; text-align:center;">
+        Course edited successfully 🎉
+    </div>
 <?php elseif ($success === "0"): ?>
     <div id="alert-box" style="padding:10px; background:#f8d7da; color:#721c24; border-radius:5px; margin-bottom:15px; text-align:center;">
         Failed to create course. (Shocking, I know.)
@@ -31,9 +35,9 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
 
         <div class="courses-grid">
             <?php foreach ($courses as $course): ?>
-                <div class="course-card">
+                <div class="course-card" id="course-card-<?php echo $course ["id"]?>">
                     <div class="course-header">
-                        <span class="badge badge-<?php echo strtolower($course["levels"]) ?>"><?php echo strtolower($course["levels"]) ?></span>
+                        <span class="badge badge-<?php echo strtolower($course["levels"]) ?>"><?php echo $course["levels"] ?></span>
                     </div>
                     <h3 class="course-title"><?php echo $course["title"] ?></h3>
                     <p class="course-description">

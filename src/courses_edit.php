@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . "/assets/includes/config.php";
 
+$coursId = $_GET['id'] ?? null;
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $isValid = true;
@@ -27,16 +29,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $title = $_POST["title"];
     $description = $_POST["description"];
     $level = $_POST["level"];
-
-    $sql = "INSERT INTO courses (title, descriptions, levels) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $title, $description, $level);
-
+    if ($coursId) {
+        $sql = "UPDATE courses SET title = ?, descriptions = ?, levels = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssi", $title, $description, $level, $coursId);
+    } else {
+        header("Location: /?success=0");
+        exit;
+    }
+    
     if ($stmt->execute()) {
-        header("Location: /?success=1");
+        header("Location: /?success=2");
         exit;
     } else {
         echo "Error: " . $conn->error;
     }
 }
-?>

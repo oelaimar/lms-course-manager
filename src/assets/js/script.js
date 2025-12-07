@@ -22,8 +22,15 @@ function openModal(modalId, id) {
     }
     else {
         modalTitle.textContent = "Edit Course";
-        courseForum.action = "courses_create.php?id=" + id;
+        courseForum.action = "courses_edit.php?id=" + id;
         submitBtn.textContent = "Edit Course";
+        const titleToEdit = document.querySelector(`#course-card-${id} .course-title`);
+        const descriptionToEdit = document.querySelector(`#course-card-${id} .course-description`);
+        const LevelToEdit = document.querySelector(`#course-card-${id} .badge`);
+        //filed the values
+        courseTitle.value = titleToEdit.innerText;
+        courseDescription.value = descriptionToEdit.innerText;
+        coursLevel.value = LevelToEdit.innerText;
     }
 }
 function validationForum(e) {
