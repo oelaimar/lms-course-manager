@@ -2,21 +2,27 @@
 const modalTitle = document.getElementById('modal-title') as HTMLElement;
 const courseForum = document.getElementById('courseForum') as HTMLFormElement;
 const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+
 const courseTitle = document.getElementById('courseTitle') as HTMLInputElement;
 const courseDescription = document.getElementById('courseDescription') as HTMLInputElement;
 const coursLevel = document.getElementById('coursLevel') as HTMLInputElement;
+
 const errorCourseTitle = document.getElementById('errorCourseTitle') as HTMLElement;
 const errorCourseDescription = document.getElementById('errorCourseDescription') as HTMLTextAreaElement;
 const errorCoursLevel = document.getElementById('errorCoursLevel') as HTMLElement;
+
 const deleteTilteModal = document.querySelector('#deleteModal .text-center') as HTMLElement;
 const deleteForm = document.getElementById('deleteForm') as HTMLFormElement;
 
+const sectionForum = document.getElementById('sectionForm') as HTMLFormElement;
+
+//open modals for add and edit a course
 function openModal(modalId: string, id: number): void {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.add("active");
 
-    courseForum.addEventListener('submit', validationForum);
-    //here i will add if add new course or if edit existion course
+    courseForum.addEventListener('submit', validationCourseForum);
+
     if (id == 0) {
         modalTitle.textContent = "Add New Course";
         courseForum.action = "courses_create.php";
@@ -39,6 +45,7 @@ function openModal(modalId: string, id: number): void {
     }
 }
 
+//open modal for delete a course
 function openDeleteModal(modalId: string, id: number): void {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.add("active");
@@ -46,10 +53,11 @@ function openDeleteModal(modalId: string, id: number): void {
     const titleToDelet = document.querySelector(`#course-card-${id} .course-title`) as HTMLElement;
 
     deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
-    deleteForm.action = "courses_delete.php?id=" + id;    
+    deleteForm.action = "courses_delete.php?id=" + id;
 }
 
-function validationForum(e: Event): void {
+//validation after add or edit a course
+function validationCourseForum(e: Event): void {
     e.preventDefault();
 
     let isValid = true;
@@ -76,6 +84,7 @@ function validationForum(e: Event): void {
     }
 }
 
+//close modal for edit delete update
 function closeModal(modalId: string): void {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.remove("active");
@@ -86,6 +95,7 @@ function closeModal(modalId: string): void {
     }
 }
 
+//time out for the alert message
 let timeOutAlert;
 
 if (timeOutAlert) {
@@ -100,3 +110,19 @@ timeOutAlert = setTimeout(() => {
         setTimeout(() => alertBox.remove(), 800);
     }
 }, 5000);
+
+//open modals for add and edit a section
+function openSectionModal(modalId: string, id: number): void {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.classList.add("active");
+    let asdfadsf = id;
+    sectionForum.addEventListener('submit', validationSectionForum);
+}
+
+function validationSectionForum(e: Event) {
+    e.preventDefault();
+
+    let isValid = true;
+    courseForum.submit();
+
+}

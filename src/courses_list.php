@@ -5,20 +5,52 @@ require_once __DIR__ . "/assets/includes/header.php";
 $success = $_GET['success'] ?? null;
 ?>
 <?php if ($success === "1"): ?>
-    <div id="alert-box" style="padding:10px; background:#d4edda; color:#155724; border-radius:5px; margin-bottom:15px; text-align:center;">
-        Course created successfully 🎉
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">Course created successfully</div>
+            </div>
+        </div>
     </div>
 <?php elseif ($success === "2"): ?>
-    <div id="alert-box" style="padding:10px; background:#d4edda; color:#155724; border-radius:5px; margin-bottom:15px; text-align:center;">
-        Course edited successfully 🎉
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">Course edited successfully</div>
+            </div>
+        </div>
     </div>
 <?php elseif ($success === "3"): ?>
-    <div id="alert-box" style="padding:10px; background:#d4edda; color:#155724; border-radius:5px; margin-bottom:15px; text-align:center;">
-        Course deleted successfully 🎉
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">Course deleted successfully</div>
+            </div>
+        </div>
     </div>
 <?php elseif ($success === "0"): ?>
-    <div id="alert-box" style="padding:10px; background:#f8d7da; color:#721c24; border-radius:5px; margin-bottom:15px; text-align:center;">
-        Operation failed. Please try again.
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-error">
+            <div class="toast-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Error</div>
+                <div class="toast-message">Something went wrong</div>
+            </div>
+        </div>
     </div>
 <?php endif; ?>
 

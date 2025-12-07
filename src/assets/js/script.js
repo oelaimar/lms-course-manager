@@ -11,12 +11,13 @@ const errorCourseDescription = document.getElementById('errorCourseDescription')
 const errorCoursLevel = document.getElementById('errorCoursLevel');
 const deleteTilteModal = document.querySelector('#deleteModal .text-center');
 const deleteForm = document.getElementById('deleteForm');
+const sectionForum = document.getElementById('sectionForm');
+//open modals for add and edit a course
 function openModal(modalId, id) {
     const modal = document.getElementById(modalId);
     if (modal)
         modal.classList.add("active");
-    courseForum.addEventListener('submit', validationForum);
-    //here i will add if add new course or if edit existion course
+    courseForum.addEventListener('submit', validationCourseForum);
     if (id == 0) {
         modalTitle.textContent = "Add New Course";
         courseForum.action = "courses_create.php";
@@ -35,6 +36,7 @@ function openModal(modalId, id) {
         coursLevel.value = LevelToEdit.innerText;
     }
 }
+//open modal for delete a course
 function openDeleteModal(modalId, id) {
     const modal = document.getElementById(modalId);
     if (modal)
@@ -43,7 +45,8 @@ function openDeleteModal(modalId, id) {
     deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
     deleteForm.action = "courses_delete.php?id=" + id;
 }
-function validationForum(e) {
+//validation after add or edit a course
+function validationCourseForum(e) {
     e.preventDefault();
     let isValid = true;
     if (courseTitle.value.trim() == "") {
@@ -65,6 +68,7 @@ function validationForum(e) {
         courseForum.submit();
     }
 }
+//close modal for edit delete update
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal)
@@ -75,6 +79,7 @@ function closeModal(modalId) {
         errorCoursLevel.textContent = "";
     }
 }
+//time out for the alert message
 let timeOutAlert;
 if (timeOutAlert) {
     clearTimeout(timeOutAlert);
@@ -87,3 +92,16 @@ timeOutAlert = setTimeout(() => {
         setTimeout(() => alertBox.remove(), 800);
     }
 }, 5000);
+//open modals for add and edit a section
+function openSectionModal(modalId, id) {
+    const modal = document.getElementById(modalId);
+    if (modal)
+        modal.classList.add("active");
+    let asdfadsf = id;
+    sectionForum.addEventListener('submit', validationSectionForum);
+}
+function validationSectionForum(e) {
+    e.preventDefault();
+    let isValid = true;
+    courseForum.submit();
+}
