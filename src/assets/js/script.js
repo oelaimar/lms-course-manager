@@ -9,6 +9,8 @@ const coursLevel = document.getElementById('coursLevel');
 const errorCourseTitle = document.getElementById('errorCourseTitle');
 const errorCourseDescription = document.getElementById('errorCourseDescription');
 const errorCoursLevel = document.getElementById('errorCoursLevel');
+const deleteTilteModal = document.querySelector('#deleteModal .text-center');
+const deleteForm = document.getElementById('deleteForm');
 function openModal(modalId, id) {
     const modal = document.getElementById(modalId);
     if (modal)
@@ -32,6 +34,14 @@ function openModal(modalId, id) {
         courseDescription.value = descriptionToEdit.innerText;
         coursLevel.value = LevelToEdit.innerText;
     }
+}
+function openDeleteModal(modalId, id) {
+    const modal = document.getElementById(modalId);
+    if (modal)
+        modal.classList.add("active");
+    const titleToDelet = document.querySelector(`#course-card-${id} .course-title`);
+    deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
+    deleteForm.action = "courses_delete.php?id=" + id;
 }
 function validationForum(e) {
     e.preventDefault();
@@ -59,9 +69,11 @@ function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal)
         modal.classList.remove("active");
-    errorCourseTitle.textContent = "";
-    errorCourseDescription.textContent = "";
-    errorCoursLevel.textContent = "";
+    if (modalId === 'courseModal') {
+        errorCourseTitle.textContent = "";
+        errorCourseDescription.textContent = "";
+        errorCoursLevel.textContent = "";
+    }
 }
 let timeOutAlert;
 if (timeOutAlert) {

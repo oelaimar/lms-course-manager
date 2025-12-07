@@ -8,6 +8,8 @@ const coursLevel = document.getElementById('coursLevel') as HTMLInputElement;
 const errorCourseTitle = document.getElementById('errorCourseTitle') as HTMLElement;
 const errorCourseDescription = document.getElementById('errorCourseDescription') as HTMLTextAreaElement;
 const errorCoursLevel = document.getElementById('errorCoursLevel') as HTMLElement;
+const deleteTilteModal = document.querySelector('#deleteModal .text-center') as HTMLElement;
+const deleteForm = document.getElementById('deleteForm') as HTMLFormElement;
 
 function openModal(modalId: string, id: number): void {
     const modal = document.getElementById(modalId);
@@ -24,7 +26,7 @@ function openModal(modalId: string, id: number): void {
         modalTitle.textContent = "Edit Course";
         courseForum.action = "courses_edit.php?id=" + id;
         submitBtn.textContent = "Edit Course";
-        
+
         const titleToEdit = document.querySelector(`#course-card-${id} .course-title`) as HTMLElement;
         const descriptionToEdit = document.querySelector(`#course-card-${id} .course-description`) as HTMLElement;
         const LevelToEdit = document.querySelector(`#course-card-${id} .badge`) as HTMLElement;
@@ -35,6 +37,16 @@ function openModal(modalId: string, id: number): void {
         coursLevel.value = LevelToEdit.innerText;
 
     }
+}
+
+function openDeleteModal(modalId: string, id: number): void {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.classList.add("active");
+
+    const titleToDelet = document.querySelector(`#course-card-${id} .course-title`) as HTMLElement;
+
+    deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
+    deleteForm.action = "courses_delete.php?id=" + id;    
 }
 
 function validationForum(e: Event): void {
@@ -67,9 +79,11 @@ function validationForum(e: Event): void {
 function closeModal(modalId: string): void {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.remove("active");
-    errorCourseTitle.textContent = "";
-    errorCourseDescription.textContent = "";
-    errorCoursLevel.textContent = "";
+    if (modalId === 'courseModal') {
+        errorCourseTitle.textContent = "";
+        errorCourseDescription.textContent = "";
+        errorCoursLevel.textContent = "";
+    }
 }
 
 let timeOutAlert;

@@ -12,9 +12,13 @@ $success = $_GET['success'] ?? null;
     <div id="alert-box" style="padding:10px; background:#d4edda; color:#155724; border-radius:5px; margin-bottom:15px; text-align:center;">
         Course edited successfully 🎉
     </div>
+<?php elseif ($success === "3"): ?>
+    <div id="alert-box" style="padding:10px; background:#d4edda; color:#155724; border-radius:5px; margin-bottom:15px; text-align:center;">
+        Course deleted successfully 🎉
+    </div>
 <?php elseif ($success === "0"): ?>
     <div id="alert-box" style="padding:10px; background:#f8d7da; color:#721c24; border-radius:5px; margin-bottom:15px; text-align:center;">
-        Failed to create course. (Shocking, I know.)
+        Operation failed. Please try again.
     </div>
 <?php endif; ?>
 
@@ -35,7 +39,7 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
 
         <div class="courses-grid">
             <?php foreach ($courses as $course): ?>
-                <div class="course-card" id="course-card-<?php echo $course ["id"]?>">
+                <div class="course-card" id="course-card-<?php echo $course["id"] ?>">
                     <div class="course-header">
                         <span class="badge badge-<?php echo strtolower($course["levels"]) ?>"><?php echo $course["levels"] ?></span>
                     </div>
@@ -53,11 +57,9 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
                             <button class="btn-icon" onclick="openModal('courseModal', <?php echo $course['id'] ?>)">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <a href="courses_delete.php?id=<?php echo $course['id'] ?>">
-                                <button class="btn-icon" style="color: #ef4444;">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </a>
+                            <button class="btn-icon" style="color: #ef4444;" onclick="openDeleteModal('deleteModal', <?php echo $course['id'] ?>)">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -115,6 +117,37 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
                 <button id="submitBtn" type="submit" class="btn btn-primary">Create Course</button>
             </div>
         </form>
+    </div>
+</div>
+
+<div id="deleteModal" class="modal-overlay" onclick="closeModal('deleteModal')">
+    <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title text-center">Delete Course: </h2>
+        </div>
+        <div class="modal-content">
+            <div class="modal-icon modal-icon-danger">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <p class="modal-text">
+                Are you sure you want to delete this course? This action cannot be undone.
+            </p>
+            <div class="modal-warning">
+                <p class="modal-warning-text">
+                    <i class="fas fa-info-circle"></i>
+                    All course sections and content will be permanently deleted.
+                </p>
+            </div>
+            <form id="deleteForm" action="courses_delete.php" method="POST">
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('deleteModal')">Cancel</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i>
+                        Delete Course
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
