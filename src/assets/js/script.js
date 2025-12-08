@@ -118,15 +118,15 @@ function openSectionModal(modalId, id) {
     }
     else {
         modalSectiontitle.textContent = "Edit Section";
-        sectionForum.action = "sections_create.php?id=" + id;
+        sectionForum.action = "sections_edit.php?id=" + id;
         submitBtnSection.textContent = "Edit Section";
         const titleToEdit = document.querySelector(`#Section-card-${id} .section-title`);
         const textToEdit = document.querySelector(`#Section-card-${id} .section-text`);
-        const LevelToEdit = document.querySelector(`#Section-card-${id} .badge`);
+        const positionToEdit = document.querySelector(`#Section-card-${id} .position`);
         //filed the values
         sectionTitle.value = titleToEdit.innerText;
         sectionDescription.value = textToEdit.innerText;
-        sectionPosition.value = LevelToEdit.innerText;
+        sectionPosition.value = positionToEdit.innerText;
     }
 }
 function validationSectionForum(e) {

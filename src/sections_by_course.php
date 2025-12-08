@@ -115,6 +115,7 @@ $stmt->close();
                     </div>
                     <div class="section-content">
                         <div class="section-header">
+                            <p style="display: none;" class="position"><?php echo $section["position"] ?></p>
                             <span class="section-number"><?php echo ++$count; ?></span>
                             <h3 class="section-title"><?php echo $section['title']; ?></h3>
                         </div>
@@ -127,62 +128,63 @@ $stmt->close();
                         </p>
                     </div>
                     <div class="section-actions">
-                        <button class="btn-icon">
+                        <button class="btn-icon" onclick="openSectionModal('sectionModal', <?php echo $section['id'] ?>)">
                             <i class="fas fa-edit"></i>
                         </button>
                         <button class="btn-icon" style="color: #ef4444;">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
+
                 </div>
             <?php endforeach; ?>
             <?php
             echo empty($sections) ? "<div class='empty-state'>" : "<div class='empty-state' style='display: none;'>";
             ?>
-                <div class="empty-state-icon">
-                    <i class="fas fa-book-open"></i>
-                </div>
-                <h2 class="empty-state-title">No Sections Yet</h2>
-                <p class="empty-state-text">Get started by creating your first Section</p>
-                <button class="btn btn-primary" onclick="openSectionModal('sectionModal' , 0);">
-                    <i class="fas fa-plus"></i> Create Your First Section
-                </button>
+            <div class="empty-state-icon">
+                <i class="fas fa-book-open"></i>
             </div>
+            <h2 class="empty-state-title">No Sections Yet</h2>
+            <p class="empty-state-text">Get started by creating your first Section</p>
+            <button class="btn btn-primary" onclick="openSectionModal('sectionModal' , 0);">
+                <i class="fas fa-plus"></i> Create Your First Section
+            </button>
         </div>
     </div>
 </div>
+</div>
 <div id="sectionModal" class="modal-overlay" onclick="closeModal('sectionModal')">
-        <div class="modal" onclick="event.stopPropagation()">
-            <div class="modal-header">
-                <h2 id="modal-title-section" class="modal-title">Add New Section</h2>
-                <button class="close-modal" onclick="closeModal('sectionModal')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <form id="sectionForm" action="sections_edit.php" method="POST">
-                <div class="form-group">
-                    <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionTitle"></span>
-                    <label class="form-label">Section Title</label>
-                    <input id="sectionTitle" type="text" name="SectionTitle" class="form-input" placeholder="e.g., Introduction to Variables">
-                </div>
-                <div class="form-group">
-                    <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionDescription"></span>
-                    <label class="form-label">Section Content</label>
-                    <textarea id="sectionDescription" name="sectionContent" class="form-textarea" placeholder="Enter the section content..."></textarea>
-                </div>
-                <div class="form-group">
-                    <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionPosition"></span>
-                    <label class="form-label">Position</label>
-                    <input id="sectionPosition" type="number" name="position" class="form-input" placeholder="1" min="1">
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('sectionModal')">Cancel</button>
-                    <button id="submitBtnSection" type="submit" class="btn btn-primary">Add Section</button>
-                </div>
-                <input type="hidden" name="course_id" value="<?php echo $courses[0]["id"] ?>">
-            </form>
+    <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <h2 id="modal-title-section" class="modal-title">Add New Section</h2>
+            <button class="close-modal" onclick="closeModal('sectionModal')">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
+        <form id="sectionForm" action="sections_edit.php" method="POST">
+            <div class="form-group">
+                <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionTitle"></span>
+                <label class="form-label">Section Title</label>
+                <input id="sectionTitle" type="text" name="SectionTitle" class="form-input" placeholder="e.g., Introduction to Variables">
+            </div>
+            <div class="form-group">
+                <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionDescription"></span>
+                <label class="form-label">Section Content</label>
+                <textarea id="sectionDescription" name="sectionContent" class="form-textarea" placeholder="Enter the section content..."></textarea>
+            </div>
+            <div class="form-group">
+                <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionPosition"></span>
+                <label class="form-label">Position</label>
+                <input id="sectionPosition" type="number" name="position" class="form-input" placeholder="1" min="1">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('sectionModal')">Cancel</button>
+                <button id="submitBtnSection" type="submit" class="btn btn-primary">Add Section</button>
+            </div>
+            <input type="hidden" name="course_id" value="<?php echo $courses[0]["id"] ?>">
+        </form>
     </div>
+</div>
 <?php
 require_once __DIR__ . "/assets/includes/footer.php";
 ?>

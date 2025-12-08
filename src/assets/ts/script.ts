@@ -140,17 +140,17 @@ function openSectionModal(modalId: string, id: number): void {
 
     } else {
         modalSectiontitle.textContent = "Edit Section";
-        sectionForum.action = "sections_create.php?id=" + id;
+        sectionForum.action = "sections_edit.php?id=" + id;
         submitBtnSection.textContent = "Edit Section";
 
         const titleToEdit = document.querySelector(`#Section-card-${id} .section-title`) as HTMLElement;
         const textToEdit = document.querySelector(`#Section-card-${id} .section-text`) as HTMLElement;
-        const LevelToEdit = document.querySelector(`#Section-card-${id} .badge`) as HTMLElement;
-
+        const positionToEdit = document.querySelector(`#Section-card-${id} .position`) as HTMLElement;
+        
         //filed the values
         sectionTitle.value = titleToEdit.innerText;
         sectionDescription.value = textToEdit.innerText;
-        sectionPosition.value = LevelToEdit.innerText;
+        sectionPosition.value = positionToEdit.innerText;
 
     }
 }
