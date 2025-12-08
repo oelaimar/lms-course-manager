@@ -25,7 +25,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
+      MYSQL_DATABASE: lms_courses
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
