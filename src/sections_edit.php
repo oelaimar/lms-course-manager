@@ -23,8 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $position = $_POST["position"];
     $courseId = $_POST["course_id"];
 
+    session_start();
+
     if (!$isValid) {
-        header("Location: sections_by_course.php?course_id=$courseId&success=0");
+        $_SESSION['success'] = "0";
+        header("Location: sections_by_course.php?course_id=$courseId");
         exit;
     }
 
@@ -33,12 +36,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("issii", $courseId, $SectionTitle, $sectionContent, $position, $sectionId);
     } else {
-        header("Location: sections_by_course.php?course_id=$courseId&success=0");
+        $_SESSION['success'] = "0";
+        header("Location: sections_by_course.php?course_id=$courseId");
         exit;
     }
 
     if ($stmt->execute()) {
-        header("Location: sections_by_course.php?course_id=$courseId&success=2");
+        $_SESSION['success'] = "2";
+        header("Location: sections_by_course.php?course_id=$courseId");
         exit;
     } else {
         echo "Error: " . $conn->error;

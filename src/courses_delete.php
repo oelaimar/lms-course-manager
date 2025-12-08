@@ -3,17 +3,21 @@ require_once __DIR__ . "/assets/includes/config.php";
 
 $coursId = $_GET['id'] ?? null;
 
+session_start();
+
 if ($coursId) {
     $sql = "DELETE FROM courses WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $coursId);
 } else {
-    header("Location: /?success=0");
+    $_SESSION['success'] = "0";
+    header("Location: /");
     exit;
 }
 
 if ($stmt->execute()) {
-    header("Location: /?success=3");
+    $_SESSION['success'] = "3";
+    header("Location: /");
     exit;
 } else {
     echo "Error: " . $conn->error;

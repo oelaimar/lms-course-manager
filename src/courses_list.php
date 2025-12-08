@@ -1,8 +1,12 @@
 <?php
 require_once __DIR__ . "/assets/includes/header.php";
-?>
-<?php
-$success = $_GET['success'] ?? null;
+
+$success = null;
+
+if (isset($_SESSION['success'])) {
+    $success = $_SESSION['success'];
+    unset($_SESSION['success']);
+}
 ?>
 <?php if ($success === "1"): ?>
     <div class="toast-container">

@@ -18,11 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($_POST['description'])) {
         $isValid = false;
     }
+    session_start();
 
     if (!$isValid) {
-        header("Location: /?success=0");
+        $_SESSION['success'] = "0";
+        header("Location: /");
         exit;
     }
+
 
     $title = $_POST["title"];
     $description = $_POST["description"];
@@ -33,7 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("sss", $title, $description, $level);
 
     if ($stmt->execute()) {
-        header("Location: /?success=1");
+        $_SESSION['success'] = "1";
+        header("Location: /");
         exit;
     } else {
         echo "Error: " . $conn->error;

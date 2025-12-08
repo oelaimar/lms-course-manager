@@ -2,7 +2,12 @@
 require_once __DIR__ . "/assets/includes/header.php";
 
 $coursId = $_GET['course_id'] ?? null;
-$success = $_GET['success'] ?? null;
+$success = null;
+
+if (isset($_SESSION['success'])) {
+    $success = $_SESSION['success'];
+    unset($_SESSION['success']);
+}
 
 $sqlCousrses = "SELECT * FROM courses WHERE id = ?";
 $sqlSections = "SELECT * FROM sections WHERE course_id = ? ORDER BY position ASC";
