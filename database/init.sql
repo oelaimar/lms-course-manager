@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS courses(
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
     descriptions text NOt NULL,
-    levels VARCHAR(150) NOT NULL,
+    levels ENUM('Beginner', 'Intermediate', 'Advanced') NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
     );
 

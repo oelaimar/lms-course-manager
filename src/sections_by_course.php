@@ -2,6 +2,7 @@
 require_once __DIR__ . "/assets/includes/header.php";
 
 $coursId = $_GET['course_id'] ?? null;
+$success = $_GET['success'] ?? null;
 
 $sqlCousrses = "SELECT * FROM courses WHERE id = ?";
 $sqlSections = "SELECT * FROM sections WHERE course_id = ? ORDER BY position ASC";
@@ -22,7 +23,58 @@ $stmt->execute();
 $data = $stmt->get_result();
 $courses = $data->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
+
 ?>
+
+<?php if ($success === "1"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">Section created successfully</div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($success === "2"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">Section edited successfully</div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($success === "3"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">Section deleted successfully</div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($success === "0"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-error">
+            <div class="toast-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Error</div>
+                <div class="toast-message">Something went wrong</div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
 
 <div id="sectionsPage" class="page active">
     <div class="container">
@@ -57,7 +109,7 @@ $stmt->close();
         <div class="sections-list">
             <?php $count = 0; ?>
             <?php foreach ($sections as $section): ?>
-                <div class="section-card">
+                <div class="section-card" id="Section-card-<?php echo $section["id"] ?>">
                     <div class="drag-handle">
                         <i class="fas fa-grip-vertical"></i>
                     </div>
@@ -70,7 +122,7 @@ $stmt->close();
                         <p class="section-text">
                             <?php echo $section['content']; ?>
                         </p>
-                        <p class="section-text">
+                        <p class="section-creation">
                             created at <?php echo $section["created_at"] ?>
                         </p>
                     </div>
@@ -99,31 +151,35 @@ $stmt->close();
         </div>
     </div>
 </div>
-<div id="sectionModal" class="modal-overlay" onclick="closeModal('courseModal')">
+<div id="sectionModal" class="modal-overlay" onclick="closeModal('sectionModal')">
         <div class="modal" onclick="event.stopPropagation()">
             <div class="modal-header">
-                <h2 class="modal-title">Add New Section</h2>
+                <h2 id="modal-title-section" class="modal-title">Add New Section</h2>
                 <button class="close-modal" onclick="closeModal('sectionModal')">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <form id="sectionForm" action="sections_edit.php" method="POST">
                 <div class="form-group">
+                    <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionTitle"></span>
                     <label class="form-label">Section Title</label>
-                    <input type="text" class="form-input" placeholder="e.g., Introduction to Variables">
+                    <input id="sectionTitle" type="text" name="SectionTitle" class="form-input" placeholder="e.g., Introduction to Variables">
                 </div>
                 <div class="form-group">
+                    <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionDescription"></span>
                     <label class="form-label">Section Content</label>
-                    <textarea class="form-textarea" placeholder="Enter the section content..."></textarea>
+                    <textarea id="sectionDescription" name="sectionContent" class="form-textarea" placeholder="Enter the section content..."></textarea>
                 </div>
                 <div class="form-group">
+                    <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionPosition"></span>
                     <label class="form-label">Position</label>
-                    <input type="number" class="form-input" placeholder="1" min="1">
+                    <input id="sectionPosition" type="number" name="position" class="form-input" placeholder="1" min="1">
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('sectionModal')">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Add Section</button>
+                    <button id="submitBtnSection" type="submit" class="btn btn-primary">Add Section</button>
                 </div>
+                <input type="hidden" name="course_id" value="<?php echo $courses[0]["id"] ?>">
             </form>
         </div>
     </div>

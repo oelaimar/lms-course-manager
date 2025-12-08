@@ -14,7 +14,17 @@ const errorCoursLevel = document.getElementById('errorCoursLevel') as HTMLElemen
 const deleteTilteModal = document.querySelector('#deleteModal .text-center') as HTMLElement;
 const deleteForm = document.getElementById('deleteForm') as HTMLFormElement;
 
+const modalSectiontitle = document.getElementById('modal-title-section') as HTMLElement;
 const sectionForum = document.getElementById('sectionForm') as HTMLFormElement;
+const submitBtnSection = document.getElementById('submitBtnSection') as HTMLButtonElement;
+
+const errorSectionTitle = document.getElementById('errorSectionTitle') as HTMLElement;
+const errorSectionDescription = document.getElementById('errorSectionDescription') as HTMLTextAreaElement;
+const errorSectionPosition = document.getElementById('errorSectionPosition') as HTMLElement;
+
+const sectionTitle = document.getElementById('sectionTitle') as HTMLInputElement;
+const sectionDescription = document.getElementById('sectionDescription') as HTMLInputElement;
+const sectionPosition = document.getElementById('sectionPosition') as HTMLInputElement;
 
 //open modals for add and edit a course
 function openModal(modalId: string, id: number): void {
@@ -93,6 +103,11 @@ function closeModal(modalId: string): void {
         errorCourseDescription.textContent = "";
         errorCoursLevel.textContent = "";
     }
+    if (modalId === 'sectionModal') {
+        errorSectionTitle.textContent = "";
+        errorSectionDescription.textContent = "";
+        errorSectionPosition.textContent = "";
+    }
 }
 
 //time out for the alert message
@@ -115,14 +130,55 @@ timeOutAlert = setTimeout(() => {
 function openSectionModal(modalId: string, id: number): void {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.add("active");
-    let asdfadsf = id;
+
     sectionForum.addEventListener('submit', validationSectionForum);
+
+    if (id == 0) {
+        modalSectiontitle.textContent = "Add New Section";
+        sectionForum.action = "sections_create.php";
+        submitBtnSection.textContent = "Create Section";
+
+    } else {
+        modalSectiontitle.textContent = "Edit Section";
+        sectionForum.action = "sections_create.php?id=" + id;
+        submitBtnSection.textContent = "Edit Section";
+
+        const titleToEdit = document.querySelector(`#Section-card-${id} .section-title`) as HTMLElement;
+        const textToEdit = document.querySelector(`#Section-card-${id} .section-text`) as HTMLElement;
+        const LevelToEdit = document.querySelector(`#Section-card-${id} .badge`) as HTMLElement;
+
+        //filed the values
+        sectionTitle.value = titleToEdit.innerText;
+        sectionDescription.value = textToEdit.innerText;
+        sectionPosition.value = LevelToEdit.innerText;
+
+    }
 }
 
 function validationSectionForum(e: Event) {
     e.preventDefault();
 
     let isValid = true;
-    courseForum.submit();
+
+    if (sectionTitle.value.trim() == "") {
+        errorSectionTitle.textContent = "the title must be valid"
+        isValid = false;
+    }
+    if (sectionDescription.value.trim() == "") {
+        errorSectionDescription.textContent = "the Content must be valid"
+        isValid = false;
+    }
+    if (sectionPosition.value.trim() == "") {
+        errorSectionPosition.textContent = "the Position must be valid"
+        isValid = false;
+    }
+
+    if (isValid) {
+        errorSectionTitle.textContent = "";
+        errorSectionDescription.textContent = "";
+        errorSectionPosition.textContent = "";
+
+        sectionForum.submit();
+    }
 
 }
