@@ -131,7 +131,7 @@ $stmt->close();
                         <button class="btn-icon" onclick="openSectionModal('sectionModal', <?php echo $section['id'] ?>)">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn-icon" style="color: #ef4444;">
+                        <button class="btn-icon" style="color: #ef4444;" onclick="openDeleteModal('deleteSectionModal', <?php echo $section['id'] ?>)">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -185,6 +185,39 @@ $stmt->close();
         </form>
     </div>
 </div>
+
+<div id="deleteSectionModal" class="modal-overlay" onclick="closeModal('deleteSectionModal')">
+    <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title text-center">Delete Section: </h2>
+        </div>
+        <div class="modal-content">
+            <div class="modal-icon modal-icon-danger">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <p class="modal-text">
+                Are you sure you want to delete this Section? This action cannot be undone.
+            </p>
+            <div class="modal-warning">
+                <p class="modal-warning-text">
+                    <i class="fas fa-info-circle"></i>
+                    The sections will be permanently deleted.
+                </p>
+            </div>
+            <form id="deleteSectionForm" action="sections_delete.php" method="POST">
+                <div class="form-actions">
+                    <input type="hidden" name="course_id" value="<?php echo $courses[0]["id"] ?>">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('deleteSectionModal')">Cancel</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i>
+                        Delete Section
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <?php
 require_once __DIR__ . "/assets/includes/footer.php";
 ?>

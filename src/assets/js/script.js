@@ -20,6 +20,8 @@ const errorSectionPosition = document.getElementById('errorSectionPosition');
 const sectionTitle = document.getElementById('sectionTitle');
 const sectionDescription = document.getElementById('sectionDescription');
 const sectionPosition = document.getElementById('sectionPosition');
+const deleteTilteSectionModal = document.querySelector('#deleteSectionModal .text-center');
+const deleteSectionForm = document.getElementById('deleteSectionForm');
 //open modals for add and edit a course
 function openModal(modalId, id) {
     const modal = document.getElementById(modalId);
@@ -49,9 +51,16 @@ function openDeleteModal(modalId, id) {
     const modal = document.getElementById(modalId);
     if (modal)
         modal.classList.add("active");
-    const titleToDelet = document.querySelector(`#course-card-${id} .course-title`);
-    deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
-    deleteForm.action = "courses_delete.php?id=" + id;
+    if (modalId === "deleteModal") {
+        const titleToDelet = document.querySelector(`#course-card-${id} .course-title`);
+        deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
+        deleteForm.action = "courses_delete.php?id=" + id;
+    }
+    if (modalId === "deleteSectionModal") {
+        const titleToDelet = document.querySelector(`#Section-card-${id} .section-title`);
+        deleteTilteSectionModal.textContent = "Delete Section: " + titleToDelet.innerText;
+        deleteSectionForm.action = "sections_delete.php?id=" + id;
+    }
 }
 //validation after add or edit a course
 function validationCourseForum(e) {

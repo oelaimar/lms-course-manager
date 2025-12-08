@@ -26,6 +26,9 @@ const sectionTitle = document.getElementById('sectionTitle') as HTMLInputElement
 const sectionDescription = document.getElementById('sectionDescription') as HTMLInputElement;
 const sectionPosition = document.getElementById('sectionPosition') as HTMLInputElement;
 
+const deleteTilteSectionModal = document.querySelector('#deleteSectionModal .text-center') as HTMLElement;
+const deleteSectionForm = document.getElementById('deleteSectionForm') as HTMLFormElement;
+
 //open modals for add and edit a course
 function openModal(modalId: string, id: number): void {
     const modal = document.getElementById(modalId);
@@ -60,10 +63,20 @@ function openDeleteModal(modalId: string, id: number): void {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.add("active");
 
-    const titleToDelet = document.querySelector(`#course-card-${id} .course-title`) as HTMLElement;
+    if (modalId === "deleteModal") {
+        const titleToDelet = document.querySelector(`#course-card-${id} .course-title`) as HTMLElement;
 
-    deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
-    deleteForm.action = "courses_delete.php?id=" + id;
+        deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
+        deleteForm.action = "courses_delete.php?id=" + id;
+    }
+    if(modalId === "deleteSectionModal"){
+        const titleToDelet = document.querySelector(`#Section-card-${id} .section-title`) as HTMLElement;
+
+        deleteTilteSectionModal.textContent = "Delete Section: " + titleToDelet.innerText;
+        deleteSectionForm.action = "sections_delete.php?id=" + id;
+
+    }
+
 }
 
 //validation after add or edit a course
@@ -146,7 +159,7 @@ function openSectionModal(modalId: string, id: number): void {
         const titleToEdit = document.querySelector(`#Section-card-${id} .section-title`) as HTMLElement;
         const textToEdit = document.querySelector(`#Section-card-${id} .section-text`) as HTMLElement;
         const positionToEdit = document.querySelector(`#Section-card-${id} .position`) as HTMLElement;
-        
+
         //filed the values
         sectionTitle.value = titleToEdit.innerText;
         sectionDescription.value = textToEdit.innerText;
