@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/assets/includes/header.php";
+require_once __DIR__ . "/../assets/includes/header.php";
 
 $coursId = $_GET['course_id'] ?? null;
 $success = null;
@@ -224,5 +224,5 @@ $stmt->close();
 </div>
 
 <?php
-require_once __DIR__ . "/assets/includes/footer.php";
+require_once __DIR__ . "/../assets/includes/footer.php";
 ?>

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/assets/includes/config.php";
+require_once __DIR__ . "../assets/includes/config.php";
 
 $sectionId = $_GET['id'] ?? null;
 $courseId = $_POST["course_id"];

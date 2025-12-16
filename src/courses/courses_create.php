@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/assets/includes/config.php";
+require_once __DIR__ . "../assets/includes/config.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -43,4 +43,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Error: " . $conn->error;
     }
 }
-?>

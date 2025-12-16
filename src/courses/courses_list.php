@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/assets/includes/header.php";
+require_once __DIR__ . "/../assets/includes/header.php";
 
 $success = null;
 
@@ -85,7 +85,7 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
                     </p>
                     <div class="course-footer">
                         <div class="action-buttons">
-                            <a href="sections_by_course.php?course_id=<?php echo $course['id'] ?>">
+                            <a href="/../sections/sections_by_course.php?course_id=<?php echo $course['id'] ?>">
                                 <button class="btn btn-secondary">
                                     <i class="fas fa-list"></i> View Sections
                                 </button>
@@ -188,5 +188,5 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <?php
-require_once __DIR__ . "/assets/includes/footer.php";
+require_once __DIR__ . "/../assets/includes/footer.php";
 ?>
