@@ -91,7 +91,7 @@ $stmt->close();
 
         <div class="course-info-card">
             <h2 class="course-info-title"><?php echo $courses[0]["title"] ?></h2>
-            <p><?php echo $courses[0]["descriptions"] ?></p>
+            <p><?php echo $courses[0]["description"] ?></p>
             <div class="course-info-meta">
                 <div class="meta-item">
                     <i class="fas fa-signal"></i>

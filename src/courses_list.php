@@ -77,7 +77,7 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
             <?php foreach ($courses as $course): ?>
                 <div class="course-card" id="course-card-<?php echo $course["id"] ?>">
                     <div class="course-header">
-                        <span class="badge badge-<?php echo strtolower($course["levels"]) ?>"><?php echo $course["levels"] ?></span>
+                        <span class="badge badge-<?php echo strtolower($course["level"]) ?>"><?php echo $course["level"] ?></span>
                     </div>
                     <h3 class="course-title"><?php echo $course["title"] ?></h3>
                     <p class="course-description">

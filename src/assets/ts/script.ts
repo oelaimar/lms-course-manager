@@ -69,7 +69,7 @@ function openDeleteModal(modalId: string, id: number): void {
         deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
         deleteForm.action = "courses_delete.php?id=" + id;
     }
-    if(modalId === "deleteSectionModal"){
+    if (modalId === "deleteSectionModal") {
         const titleToDelet = document.querySelector(`#Section-card-${id} .section-title`) as HTMLElement;
 
         deleteTilteSectionModal.textContent = "Delete Section: " + titleToDelet.innerText;
@@ -121,6 +121,14 @@ function closeModal(modalId: string): void {
         errorSectionDescription.textContent = "";
         errorSectionPosition.textContent = "";
     }
+
+    sectionTitle.value = "";
+    sectionDescription.value = "";
+    sectionPosition.value = "";
+
+    courseTitle.value = "";
+    courseDescription.value = "";
+    coursLevel.value = "";
 }
 
 //time out for the alert message

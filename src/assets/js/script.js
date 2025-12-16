@@ -100,6 +100,12 @@ function closeModal(modalId) {
         errorSectionDescription.textContent = "";
         errorSectionPosition.textContent = "";
     }
+    sectionTitle.value = "";
+    sectionDescription.value = "";
+    sectionPosition.value = "";
+    courseTitle.value = "";
+    courseDescription.value = "";
+    coursLevel.value = "";
 }
 //time out for the alert message
 let timeOutAlert;
