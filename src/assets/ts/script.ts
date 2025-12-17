@@ -29,10 +29,16 @@ const sectionPosition = document.getElementById('sectionPosition') as HTMLInputE
 const deleteTilteSectionModal = document.querySelector('#deleteSectionModal .text-center') as HTMLElement;
 const deleteSectionForm = document.getElementById('deleteSectionForm') as HTMLFormElement;
 
-//open modals for add and edit a course
+const modalTitleLogin = document.getElementById('modalTitleLogin') as HTMLElement;
+const loginBtn = document.getElementById('loginBtn') as HTMLElement;
+const signupBtn = document.getElementById('signupBtn') as HTMLElement;
+
+//open modals for add and edit a course and login singup modal
 function openModal(modalId: string, id: number): void {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.add("active");
+
+    if(modalId === 'loginModal')return;
 
     courseForum.addEventListener('submit', validationCourseForum);
 
@@ -200,6 +206,32 @@ function validationSectionForum(e: Event) {
         errorSectionPosition.textContent = "";
 
         sectionForum.submit();
+    }
+
+}
+
+//switch sing in and login
+function switchTab(tab : string): void {
+    const theTab = document.getElementById(tab) as HTMLElement;
+    const allTabs = document.querySelectorAll<HTMLElement>('.tab-content');
+
+    allTabs.forEach(eachTab => {
+        eachTab.classList.remove('active');
+    });
+
+    loginBtn.classList.remove('active');
+    signupBtn.classList.remove('active');
+
+    if(tab === 'signupTab'){
+        modalTitleLogin.innerHTML = 'Create Account';
+        theTab.classList.add('active');
+        signupBtn.classList.add('active');
+    }
+
+    if(tab === 'loginTab'){
+        modalTitleLogin.innerHTML = 'Welcome Back';
+        theTab.classList.add('active');
+        loginBtn.classList.add('active');
     }
 
 }

@@ -22,11 +22,16 @@ const sectionDescription = document.getElementById('sectionDescription');
 const sectionPosition = document.getElementById('sectionPosition');
 const deleteTilteSectionModal = document.querySelector('#deleteSectionModal .text-center');
 const deleteSectionForm = document.getElementById('deleteSectionForm');
-//open modals for add and edit a course
+const modalTitleLogin = document.getElementById('modalTitleLogin');
+const loginBtn = document.getElementById('loginBtn');
+const signupBtn = document.getElementById('signupBtn');
+//open modals for add and edit a course and login singup modal
 function openModal(modalId, id) {
     const modal = document.getElementById(modalId);
     if (modal)
         modal.classList.add("active");
+    if (modalId === 'loginModal')
+        return;
     courseForum.addEventListener('submit', validationCourseForum);
     if (id == 0) {
         modalTitle.textContent = "Add New Course";
@@ -164,5 +169,25 @@ function validationSectionForum(e) {
         errorSectionDescription.textContent = "";
         errorSectionPosition.textContent = "";
         sectionForum.submit();
+    }
+}
+//switch sing in and login
+function switchTab(tab) {
+    const theTab = document.getElementById(tab);
+    const allTabs = document.querySelectorAll('.tab-content');
+    allTabs.forEach(eachTab => {
+        eachTab.classList.remove('active');
+    });
+    loginBtn.classList.remove('active');
+    signupBtn.classList.remove('active');
+    if (tab === 'signupTab') {
+        modalTitleLogin.innerHTML = 'Create Account';
+        theTab.classList.add('active');
+        signupBtn.classList.add('active');
+    }
+    if (tab === 'loginTab') {
+        modalTitleLogin.innerHTML = 'Welcome Back';
+        theTab.classList.add('active');
+        loginBtn.classList.add('active');
     }
 }

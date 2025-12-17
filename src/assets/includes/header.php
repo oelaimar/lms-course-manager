@@ -21,10 +21,84 @@ session_start();
             <nav>
                 <ul class="nav-menu">
                     <li><a href="#">Courses</a></li>
-                    <li><a href="#">Students</a></li>
-                    <li><a href="#">Reports</a></li>
-                    <li><a href="#">Settings</a></li>
+                    <button class="btn btn-primary" onclick="openModal('loginModal')">login</button>
+                    <img src="" alt="">
                 </ul>
             </nav>
         </div>
     </header>
+    
+    <div id="loginModal" class="modal-overlay" onclick="closeModal('loginModal')">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="modalTitleLogin" class="modal-title">Welcome Back</h2>
+                <button class="close-modal" onclick="closeModal('loginModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <!-- Tab Switcher -->
+                <div class="tab-switcher">
+                    <button id="loginBtn" class="tab-btn active" onclick="switchTab('loginTab')">Login</button>
+                    <button id="signupBtn" class="tab-btn " onclick="switchTab('signupTab')">Sign Up</button>
+                </div>
+
+                <!-- Login Tab -->
+                <div id="loginTab" class="tab-content active">
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="loginEmail">Email Address *</label>
+                            <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="loginPassword">Password *</label>
+                            <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                        </div>
+
+                        <button type="submit" style="width:100%;" class="btn btn-primary">Login</button>
+
+                        <div class="text-center">
+                            Don't have an account? 
+                            <a class="link" onclick="switchTab('signupTab');">Sign up</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Signup Tab -->
+                <div id="signupTab" class="tab-content ">
+                    <form onsubmit="handleSignup(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="signupName">Full Name *</label>
+                            <input type="text" id="signupName" class="form-input" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="signupEmail">Email Address *</label>
+                            <input type="email" id="signupEmail" class="form-input" placeholder="you@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="signupPassword">Password *</label>
+                            <input type="password" id="signupPassword" class="form-input" placeholder="••••••••" minlength="6" required>
+                            <p class="form-hint">Must be at least 6 characters</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="signupConfirmPassword">Confirm Password *</label>
+                            <input type="password" id="signupConfirmPassword" class="form-input" placeholder="••••••••" required>
+                        </div>
+
+                        <button type="submit" style="width:100%;" class="btn btn-primary">Create Account</button>
+
+                        <div class="text-center">
+                            Already have an account? 
+                            <a class="link" onclick="switchTab('loginTab')">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

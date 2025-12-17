@@ -81,7 +81,7 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
                     </div>
                     <h3 class="course-title"><?php echo $course["title"] ?></h3>
                     <p class="course-description">
-                        <?php echo $course["descriptions"] ?>
+                        <?php echo $course["description"] ?>
                     </p>
                     <div class="course-footer">
                         <div class="action-buttons">
