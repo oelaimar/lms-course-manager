@@ -24,6 +24,7 @@ if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +54,9 @@ if (isset($_SESSION['user'])) {
                                     <img src='/assets/img/dumLogin.png' style='width:40px; height:40px; alt=''>
                                     <p>" . $user['name'] . "</p>
                             </div>";
-                        echo '<a href=""><button class="btn btn-primary" >logout</button></a>';
+                        echo '<form action="/auth/logout.php" method="post">
+                                <button type="submit" class="btn btn-primary">Logout</button>
+                              </form>';
                     } else {
                         echo '<button class="btn btn-primary" onclick="openModal(\'loginModal\')">login</button>';
                     }

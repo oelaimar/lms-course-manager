@@ -1,8 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/assets/includes/header.php";
-?>
 
-<?php
 $sql = "SELECT * FROM courses ORDER BY created_at DESC";
 $data = $conn->query($sql);
 $courses = $data->fetch_all(MYSQLI_ASSOC);
