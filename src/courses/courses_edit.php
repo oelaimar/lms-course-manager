@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "../assets/includes/config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/assets/includes/config.php";
 
 $coursId = $_GET['id'] ?? null;
 
@@ -22,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (!$isValid) {
-        header("Location: /?success=0");
+        $_SESSION['success'] = "0";
+        header("Location: /");
         exit;
     }
 
@@ -32,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $description = $_POST["description"];
     $level = $_POST["level"];
     if ($coursId) {
-        $sql = "UPDATE courses SET title = ?, descriptions = ?, levels = ? WHERE id = ?";
+        $sql = "UPDATE courses SET title = ?, description = ?, level = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sssi", $title, $description, $level, $coursId);
     } else {

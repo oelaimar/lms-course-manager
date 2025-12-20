@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../assets/includes/header.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/assets/includes/header.php";
 
 $coursId = $_GET['course_id'] ?? null;
 $success = null;
@@ -95,7 +95,7 @@ $stmt->close();
             <div class="course-info-meta">
                 <div class="meta-item">
                     <i class="fas fa-signal"></i>
-                    <span><?php echo $courses[0]["levels"] ?> Level</span>
+                    <span><?php echo $courses[0]["level"] ?> Level</span>
                 </div>
                 <div class="meta-item">
                     <i class="fas fa-list"></i>
@@ -166,7 +166,7 @@ $stmt->close();
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <form id="sectionForm" action="sections_edit.php" method="POST">
+        <form id="sectionForm" action="/sections_edit.php" method="POST">
             <div class="form-group">
                 <span style="color: #d9534f; font-size: 16px; background-color: #f2dede;" id="errorSectionTitle"></span>
                 <label class="form-label">Section Title</label>
@@ -209,7 +209,7 @@ $stmt->close();
                     The sections will be permanently deleted.
                 </p>
             </div>
-            <form id="deleteSectionForm" action="sections_delete.php" method="POST">
+            <form id="deleteSectionForm" action="/sections_delete.php" method="POST">
                 <div class="form-actions">
                     <input type="hidden" name="course_id" value="<?php echo $courses[0]["id"] ?>">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('deleteSectionModal')">Cancel</button>
@@ -224,5 +224,5 @@ $stmt->close();
 </div>
 
 <?php
-require_once __DIR__ . "/../assets/includes/footer.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/assets/includes/footer.php";
 ?>

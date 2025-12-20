@@ -35,12 +35,12 @@ function openModal(modalId, id) {
     courseForum.addEventListener('submit', validationCourseForum);
     if (id == 0) {
         modalTitle.textContent = "Add New Course";
-        courseForum.action = "courses_create.php";
+        courseForum.action = "./courses/courses_create.php";
         submitBtn.textContent = "Create Course";
     }
     else {
         modalTitle.textContent = "Edit Course";
-        courseForum.action = "courses_edit.php?id=" + id;
+        courseForum.action = "./courses/courses_edit.php?id=" + id;
         submitBtn.textContent = "Edit Course";
         const titleToEdit = document.querySelector(`#course-card-${id} .course-title`);
         const descriptionToEdit = document.querySelector(`#course-card-${id} .course-description`);
@@ -59,12 +59,12 @@ function openDeleteModal(modalId, id) {
     if (modalId === "deleteModal") {
         const titleToDelet = document.querySelector(`#course-card-${id} .course-title`);
         deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
-        deleteForm.action = "courses_delete.php?id=" + id;
+        deleteForm.action = "./courses/courses_delete.php?id=" + id;
     }
     if (modalId === "deleteSectionModal") {
         const titleToDelet = document.querySelector(`#Section-card-${id} .section-title`);
         deleteTilteSectionModal.textContent = "Delete Section: " + titleToDelet.innerText;
-        deleteSectionForm.action = "sections_delete.php?id=" + id;
+        deleteSectionForm.action = "./sections/sections_delete.php?id=" + id;
     }
 }
 //validation after add or edit a course
@@ -99,18 +99,18 @@ function closeModal(modalId) {
         errorCourseTitle.textContent = "";
         errorCourseDescription.textContent = "";
         errorCoursLevel.textContent = "";
+        courseTitle.value = "";
+        courseDescription.value = "";
+        coursLevel.value = "";
     }
     if (modalId === 'sectionModal') {
         errorSectionTitle.textContent = "";
         errorSectionDescription.textContent = "";
         errorSectionPosition.textContent = "";
+        sectionTitle.value = "";
+        sectionDescription.value = "";
+        sectionPosition.value = "";
     }
-    sectionTitle.value = "";
-    sectionDescription.value = "";
-    sectionPosition.value = "";
-    courseTitle.value = "";
-    courseDescription.value = "";
-    coursLevel.value = "";
 }
 //time out for the alert message
 let timeOutAlert;
@@ -133,12 +133,12 @@ function openSectionModal(modalId, id) {
     sectionForum.addEventListener('submit', validationSectionForum);
     if (id == 0) {
         modalSectiontitle.textContent = "Add New Section";
-        sectionForum.action = "sections_create.php";
+        sectionForum.action = "./sections_create.php";
         submitBtnSection.textContent = "Create Section";
     }
     else {
         modalSectiontitle.textContent = "Edit Section";
-        sectionForum.action = "sections_edit.php?id=" + id;
+        sectionForum.action = "./sections_edit.php?id=" + id;
         submitBtnSection.textContent = "Edit Section";
         const titleToEdit = document.querySelector(`#Section-card-${id} .section-title`);
         const textToEdit = document.querySelector(`#Section-card-${id} .section-text`);

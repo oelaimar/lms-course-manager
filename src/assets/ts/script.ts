@@ -38,18 +38,18 @@ function openModal(modalId: string, id: number): void {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.add("active");
 
-    if(modalId === 'loginModal')return;
+    if (modalId === 'loginModal') return;
 
     courseForum.addEventListener('submit', validationCourseForum);
 
     if (id == 0) {
         modalTitle.textContent = "Add New Course";
-        courseForum.action = "courses_create.php";
+        courseForum.action = "./courses/courses_create.php";
         submitBtn.textContent = "Create Course";
 
     } else {
         modalTitle.textContent = "Edit Course";
-        courseForum.action = "courses_edit.php?id=" + id;
+        courseForum.action = "./courses/courses_edit.php?id=" + id;
         submitBtn.textContent = "Edit Course";
 
         const titleToEdit = document.querySelector(`#course-card-${id} .course-title`) as HTMLElement;
@@ -73,13 +73,13 @@ function openDeleteModal(modalId: string, id: number): void {
         const titleToDelet = document.querySelector(`#course-card-${id} .course-title`) as HTMLElement;
 
         deleteTilteModal.textContent = "Delete Course: " + titleToDelet.innerText;
-        deleteForm.action = "courses_delete.php?id=" + id;
+        deleteForm.action = "./courses/courses_delete.php?id=" + id;
     }
     if (modalId === "deleteSectionModal") {
         const titleToDelet = document.querySelector(`#Section-card-${id} .section-title`) as HTMLElement;
 
         deleteTilteSectionModal.textContent = "Delete Section: " + titleToDelet.innerText;
-        deleteSectionForm.action = "sections_delete.php?id=" + id;
+        deleteSectionForm.action = "./sections_delete.php?id=" + id;
 
     }
 
@@ -121,20 +121,20 @@ function closeModal(modalId: string): void {
         errorCourseTitle.textContent = "";
         errorCourseDescription.textContent = "";
         errorCoursLevel.textContent = "";
+
+        courseTitle.value = "";
+        courseDescription.value = "";
+        coursLevel.value = "";
     }
     if (modalId === 'sectionModal') {
         errorSectionTitle.textContent = "";
         errorSectionDescription.textContent = "";
         errorSectionPosition.textContent = "";
+
+        sectionTitle.value = "";
+        sectionDescription.value = "";
+        sectionPosition.value = "";
     }
-
-    sectionTitle.value = "";
-    sectionDescription.value = "";
-    sectionPosition.value = "";
-
-    courseTitle.value = "";
-    courseDescription.value = "";
-    coursLevel.value = "";
 }
 
 //time out for the alert message
@@ -162,12 +162,12 @@ function openSectionModal(modalId: string, id: number): void {
 
     if (id == 0) {
         modalSectiontitle.textContent = "Add New Section";
-        sectionForum.action = "sections_create.php";
+        sectionForum.action = "./sections_create.php";
         submitBtnSection.textContent = "Create Section";
 
     } else {
         modalSectiontitle.textContent = "Edit Section";
-        sectionForum.action = "sections_edit.php?id=" + id;
+        sectionForum.action = "./sections_edit.php?id=" + id;
         submitBtnSection.textContent = "Edit Section";
 
         const titleToEdit = document.querySelector(`#Section-card-${id} .section-title`) as HTMLElement;
@@ -211,7 +211,7 @@ function validationSectionForum(e: Event) {
 }
 
 //switch sing in and login
-function switchTab(tab : string): void {
+function switchTab(tab: string): void {
     const theTab = document.getElementById(tab) as HTMLElement;
     const allTabs = document.querySelectorAll<HTMLElement>('.tab-content');
 
@@ -222,13 +222,13 @@ function switchTab(tab : string): void {
     loginBtn.classList.remove('active');
     signupBtn.classList.remove('active');
 
-    if(tab === 'signupTab'){
+    if (tab === 'signupTab') {
         modalTitleLogin.innerHTML = 'Create Account';
         theTab.classList.add('active');
         signupBtn.classList.add('active');
     }
 
-    if(tab === 'loginTab'){
+    if (tab === 'loginTab') {
         modalTitleLogin.innerHTML = 'Welcome Back';
         theTab.classList.add('active');
         loginBtn.classList.add('active');

@@ -20,7 +20,7 @@ session_start();
             </div>
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="#">Courses</a></li>
+                    <li><a href="/">Courses</a></li>
                     <button class="btn btn-primary" onclick="openModal('loginModal')">login</button>
                     <img src="" alt="">
                 </ul>
@@ -47,15 +47,15 @@ session_start();
 
                 <!-- Login Tab -->
                 <div id="loginTab" class="tab-content active">
-                    <form onsubmit="handleLogin(event)">
+                    <form id="login_form" action="/auth/login.php" method="POST">
                         <div class="form-group">
                             <label class="form-label" for="loginEmail">Email Address *</label>
-                            <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" required>
+                            <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" name="loginEmail">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="loginPassword">Password *</label>
-                            <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                            <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" name="loginPassword">
                         </div>
 
                         <button type="submit" style="width:100%;" class="btn btn-primary">Login</button>
@@ -69,26 +69,26 @@ session_start();
 
                 <!-- Signup Tab -->
                 <div id="signupTab" class="tab-content ">
-                    <form onsubmit="handleSignup(event)">
+                    <form id="ingup_form" action="/auth/register.php" method="POST">
                         <div class="form-group">
                             <label class="form-label" for="signupName">Full Name *</label>
-                            <input type="text" id="signupName" class="form-input" placeholder="John Doe" required>
+                            <input type="text" id="signupName" class="form-input" placeholder="John Doe" name="signupName">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="signupEmail">Email Address *</label>
-                            <input type="email" id="signupEmail" class="form-input" placeholder="you@example.com" required>
+                            <input type="email" id="signupEmail" class="form-input" placeholder="you@example.com" name="signupEmail">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="signupPassword">Password *</label>
-                            <input type="password" id="signupPassword" class="form-input" placeholder="••••••••" minlength="6" required>
+                            <input type="password" id="signupPassword" class="form-input" placeholder="••••••••" minlength="6" name="signupPassword">
                             <p class="form-hint">Must be at least 6 characters</p>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="signupConfirmPassword">Confirm Password *</label>
-                            <input type="password" id="signupConfirmPassword" class="form-input" placeholder="••••••••" required>
+                            <input type="password" id="signupConfirmPassword" class="form-input" placeholder="••••••••" name="signupConfirmPassword">
                         </div>
 
                         <button type="submit" style="width:100%;" class="btn btn-primary">Create Account</button>

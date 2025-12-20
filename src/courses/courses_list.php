@@ -1,12 +1,18 @@
 <?php
-require_once __DIR__ . "/../assets/includes/header.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/assets/includes/header.php";
 
 $success = null;
+$signup = null;
 
 if (isset($_SESSION['success'])) {
     $success = $_SESSION['success'];
     unset($_SESSION['success']);
 }
+if (isset($_SESSION['signup'])) {
+    $signup = $_SESSION['signup'];
+    unset($_SESSION['signup']);
+}
+echo "hello" . $signup;
 ?>
 <?php if ($success === "1"): ?>
     <div class="toast-container">
@@ -188,5 +194,5 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <?php
-require_once __DIR__ . "/../assets/includes/footer.php";
+require_once $_SERVER['DOCUMENT_ROOT']. "/assets/includes/footer.php";
 ?>
