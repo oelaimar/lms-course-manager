@@ -1,9 +1,33 @@
 <?php
 require_once __DIR__ . '/config.php';
+
 session_start();
+
+$success = null;
+
+if (isset($_SESSION['success'])) {
+    $success = $_SESSION['success'];
+    unset($_SESSION['success']);
+}
+
+
+$login = null;
+
+if (isset($_SESSION['login'])) {
+    $login = $_SESSION['login'];
+    unset($_SESSION['login']);
+}
+
+$isLoging = false;
+if (isset($_SESSION['user'])) {
+    $isLoging = true;
+    $user = $_SESSION['user'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +36,7 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
+
 <body>
     <header class="header">
         <div class="header-content">
@@ -21,13 +46,24 @@ session_start();
             <nav>
                 <ul class="nav-menu">
                     <li><a href="/">Courses</a></li>
-                    <button class="btn btn-primary" onclick="openModal('loginModal')">login</button>
-                    <img src="" alt="">
+                    <?php
+                    if ($isLoging) {
+                        echo " <li><a href='/'>dashboard</a></li>";
+                        echo "<div style='display:flex; align-items:center; flex-direction:column; '>
+                                    <img src='/assets/img/dumLogin.png' style='width:40px; height:40px; alt=''>
+                                    <p>" . $user['name'] . "</p>
+                            </div>";
+                        echo '<a href=""><button class="btn btn-primary" >logout</button></a>';
+                    } else {
+                        echo '<button class="btn btn-primary" onclick="openModal(\'loginModal\')">login</button>';
+                    }
+
+                    ?>
                 </ul>
             </nav>
         </div>
     </header>
-    
+
     <div id="loginModal" class="modal-overlay" onclick="closeModal('loginModal')">
         <div class="modal" onclick="event.stopPropagation()">
             <div class="modal-header">
@@ -61,7 +97,7 @@ session_start();
                         <button type="submit" style="width:100%;" class="btn btn-primary">Login</button>
 
                         <div class="text-center">
-                            Don't have an account? 
+                            Don't have an account?
                             <a class="link" onclick="switchTab('signupTab');">Sign up</a>
                         </div>
                     </form>
@@ -94,7 +130,7 @@ session_start();
                         <button type="submit" style="width:100%;" class="btn btn-primary">Create Account</button>
 
                         <div class="text-center">
-                            Already have an account? 
+                            Already have an account?
                             <a class="link" onclick="switchTab('loginTab')">Login</a>
                         </div>
                     </form>
@@ -102,3 +138,78 @@ session_start();
             </div>
         </div>
     </div>
+    <?php if ($success === "1"): ?>
+        <div class="toast-container">
+            <div id="alert-box" class="toast toast-success">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">Success!</div>
+                    <div class="toast-message">Course created successfully</div>
+                </div>
+            </div>
+        </div>
+    <?php elseif ($success === "2"): ?>
+        <div class="toast-container">
+            <div id="alert-box" class="toast toast-success">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">Success!</div>
+                    <div class="toast-message">Course edited successfully</div>
+                </div>
+            </div>
+        </div>
+    <?php elseif ($success === "3"): ?>
+        <div class="toast-container">
+            <div id="alert-box" class="toast toast-success">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">Success!</div>
+                    <div class="toast-message">Course deleted successfully</div>
+                </div>
+            </div>
+        </div>
+    <?php elseif ($success === "0"): ?>
+        <div class="toast-container">
+            <div id="alert-box" class="toast toast-error">
+                <div class="toast-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">Error</div>
+                    <div class="toast-message">Something went wrong</div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($login === '1'): ?>
+        <div class="toast-container">
+            <div id="alert-box" class="toast toast-success">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">Success!</div>
+                    <div class="toast-message">you sign in successfully</div>
+                </div>
+            </div>
+        </div>
+    <?php elseif ($login === '0'): ?>
+        <div class="toast-container">
+            <div id="alert-box" class="toast toast-error">
+                <div class="toast-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">Error</div>
+                    <div class="toast-message">Something went wrong</div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>

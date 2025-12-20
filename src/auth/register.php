@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (!$isValid) {
         
-        $_SESSION['signup'] = 'regix';
+        $_SESSION['login'] = '0';
         header('location: /');
     }
 
@@ -41,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param('ssss', $name, $email, $passwordHashed, $role);
 
     if($stmt->execute()){
-        $_SESSION['signup'] = 1;
+        $_SESSION['login'] = '1';
     }else{
-        $_SESSION['signup'] = 0;
+        $_SESSION['login'] = '0';
     }
 
     header('location: /');

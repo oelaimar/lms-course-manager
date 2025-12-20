@@ -1,68 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/assets/includes/header.php";
-
-$success = null;
-$signup = null;
-
-if (isset($_SESSION['success'])) {
-    $success = $_SESSION['success'];
-    unset($_SESSION['success']);
-}
-if (isset($_SESSION['signup'])) {
-    $signup = $_SESSION['signup'];
-    unset($_SESSION['signup']);
-}
-echo "hello" . $signup;
 ?>
-<?php if ($success === "1"): ?>
-    <div class="toast-container">
-        <div id="alert-box" class="toast toast-success">
-            <div class="toast-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">Success!</div>
-                <div class="toast-message">Course created successfully</div>
-            </div>
-        </div>
-    </div>
-<?php elseif ($success === "2"): ?>
-    <div class="toast-container">
-        <div id="alert-box" class="toast toast-success">
-            <div class="toast-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">Success!</div>
-                <div class="toast-message">Course edited successfully</div>
-            </div>
-        </div>
-    </div>
-<?php elseif ($success === "3"): ?>
-    <div class="toast-container">
-        <div id="alert-box" class="toast toast-success">
-            <div class="toast-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">Success!</div>
-                <div class="toast-message">Course deleted successfully</div>
-            </div>
-        </div>
-    </div>
-<?php elseif ($success === "0"): ?>
-    <div class="toast-container">
-        <div id="alert-box" class="toast toast-error">
-            <div class="toast-icon">
-                <i class="fas fa-exclamation-circle"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">Error</div>
-                <div class="toast-message">Something went wrong</div>
-            </div>
-        </div>
-    </div>
-<?php endif; ?>
 
 <?php
 $sql = "SELECT * FROM courses ORDER BY created_at DESC";
