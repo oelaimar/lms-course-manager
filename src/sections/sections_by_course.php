@@ -31,56 +31,6 @@ $stmt->close();
 
 ?>
 
-<?php if ($success === "1"): ?>
-    <div class="toast-container">
-        <div id="alert-box" class="toast toast-success">
-            <div class="toast-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">Success!</div>
-                <div class="toast-message">Section created successfully</div>
-            </div>
-        </div>
-    </div>
-<?php elseif ($success === "2"): ?>
-    <div class="toast-container">
-        <div id="alert-box" class="toast toast-success">
-            <div class="toast-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">Success!</div>
-                <div class="toast-message">Section edited successfully</div>
-            </div>
-        </div>
-    </div>
-<?php elseif ($success === "3"): ?>
-    <div class="toast-container">
-        <div id="alert-box" class="toast toast-success">
-            <div class="toast-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">Success!</div>
-                <div class="toast-message">Section deleted successfully</div>
-            </div>
-        </div>
-    </div>
-<?php elseif ($success === "0"): ?>
-    <div class="toast-container">
-        <div id="alert-box" class="toast toast-error">
-            <div class="toast-icon">
-                <i class="fas fa-exclamation-circle"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">Error</div>
-                <div class="toast-message">Something went wrong</div>
-            </div>
-        </div>
-    </div>
-<?php endif; ?>
-
 <div id="sectionsPage" class="page active">
     <div class="container">
         <div class="breadcrumb">
@@ -106,9 +56,11 @@ $stmt->close();
 
         <div class="page-header">
             <h1 class="page-title">Course Sections</h1>
+            <?php if($isLoging):?>
             <button class="btn btn-primary" onclick="openSectionModal('sectionModal' , 0);">
                 <i class="fas fa-plus"></i> Add Section
             </button>
+            <?php endif;?>
         </div>
 
         <div class="sections-list">
@@ -132,6 +84,7 @@ $stmt->close();
                             created at <?php echo $section["created_at"] ?>
                         </p>
                     </div>
+                    <?php if($isLoging):?>
                     <div class="section-actions">
                         <button class="btn-icon" onclick="openSectionModal('sectionModal', <?php echo $section['id'] ?>)">
                             <i class="fas fa-edit"></i>
@@ -140,6 +93,7 @@ $stmt->close();
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
+                    <?php endif;?>
 
                 </div>
             <?php endforeach; ?>
@@ -151,9 +105,11 @@ $stmt->close();
             </div>
             <h2 class="empty-state-title">No Sections Yet</h2>
             <p class="empty-state-text">Get started by creating your first Section</p>
+            <?php if($isLoging):?>
             <button class="btn btn-primary" onclick="openSectionModal('sectionModal' , 0);">
                 <i class="fas fa-plus"></i> Create Your First Section
             </button>
+            <?php endif; ?>
         </div>
     </div>
 </div>

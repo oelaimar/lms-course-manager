@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     session_start();
 
     if (!$isValid) {
-        $_SESSION['success'] = "0";
+        $_SESSION['success'] = "0_course";
         header("Location: /");
         exit;
     }
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("sss", $title, $description, $level);
 
     if ($stmt->execute()) {
-        $_SESSION['success'] = "1";
+        $_SESSION['success'] = "1_course";
         header("Location: /");
         exit;
     } else {

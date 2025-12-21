@@ -10,9 +10,11 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
     <div class="container">
         <div class="page-header">
             <h1 class="page-title">Courses Management</h1>
-            <button class="btn btn-primary" onclick="openModal('courseModal',0)">
-                <i class="fas fa-plus"></i> Add New Course
-            </button>
+            <?php if ($isLoging): ?>
+                <button class="btn btn-primary" onclick="openModal('courseModal',0)">
+                    <i class="fas fa-plus"></i> Add New Course
+                </button>
+            <?php endif; ?>
         </div>
 
         <div class="courses-grid">
@@ -32,17 +34,29 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
                                     <i class="fas fa-list"></i> View Sections
                                 </button>
                             </a>
-                            <button class="btn-icon" onclick="openModal('courseModal', <?php echo $course['id'] ?>)">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn-icon" style="color: #ef4444;" onclick="openDeleteModal('deleteModal', <?php echo $course['id'] ?>)">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                            <?php if ($isLoging): ?>
+                                <button class="btn-icon" onclick="openModal('courseModal', <?php echo $course['id'] ?>)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-icon" style="color: #ef4444;" onclick="openDeleteModal('deleteModal', <?php echo $course['id'] ?>)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            <?php endif; ?>
                         </div>
                     </div>
-                    <div>
+                    <div style="margin:15px;">
                         <p>created at <?php echo $course["created_at"] ?></p>
                     </div>
+                    <?php
+                    if ($isLoging) {
+                        echo
+                        "<form action='' action='POST'>
+                            <button class='btn btn-primary' type='submit'>
+                                enroll en this course
+                            </button>   
+                        </form>";
+                    }
+                    ?>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -55,9 +69,11 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
         </div>
         <h2 class="empty-state-title">No Courses Yet</h2>
         <p class="empty-state-text">Get started by creating your first course</p>
+        <?php if ($isLoging): ?>
         <button class="btn btn-primary" onclick="openModal('courseModal', 0)">
             <i class="fas fa-plus"></i> Create Your First Course
         </button>
+        <?php endif; ?>
     </div>
 </div>
 </div>
@@ -130,5 +146,5 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']. "/assets/includes/footer.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/assets/includes/footer.php";
 ?>

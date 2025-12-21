@@ -11,13 +11,13 @@ if ($sectionId) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $sectionId);
 } else {
-    $_SESSION['success'] = "0";
+    $_SESSION['success'] = "0_section";
     header("Location: sections_by_course.php?course_id=$courseId");
     exit;
 }
 
 if ($stmt->execute()) {
-    $_SESSION['success'] = "3";
+    $_SESSION['success'] = "3_section";
     header("Location: sections_by_course.php?course_id=$courseId");
     exit;
 } else {

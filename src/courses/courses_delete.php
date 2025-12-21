@@ -10,13 +10,13 @@ if ($coursId) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $coursId);
 } else {
-    $_SESSION['success'] = "0";
+    $_SESSION['success'] = "0_course";
     header("Location: /");
     exit;
 }
 
 if ($stmt->execute()) {
-    $_SESSION['success'] = "3";
+    $_SESSION['success'] = "3_course";
     header("Location: /");
     exit;
 } else {

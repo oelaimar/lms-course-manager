@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (!$isValid) {
-        $_SESSION['success'] = "0";
+        $_SESSION['success'] = "0_course";
         header("Location: /");
         exit;
     }
@@ -37,13 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sssi", $title, $description, $level, $coursId);
     } else {
-        $_SESSION['success'] = "0";
+        $_SESSION['success'] = "0_course";
         header("Location: /");
         exit;
     }
 
     if ($stmt->execute()) {
-        $_SESSION['success'] = "2";
+        $_SESSION['success'] = "2_course";
         header("Location: /");
         exit;
     } else {

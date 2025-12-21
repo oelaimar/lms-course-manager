@@ -141,7 +141,7 @@ if (isset($_SESSION['user'])) {
             </div>
         </div>
     </div>
-    <?php if ($success === "1"): ?>
+    <?php if ($success === "1_course"): ?>
         <div class="toast-container">
             <div id="alert-box" class="toast toast-success">
                 <div class="toast-icon">
@@ -153,7 +153,7 @@ if (isset($_SESSION['user'])) {
                 </div>
             </div>
         </div>
-    <?php elseif ($success === "2"): ?>
+    <?php elseif ($success === "2_course"): ?>
         <div class="toast-container">
             <div id="alert-box" class="toast toast-success">
                 <div class="toast-icon">
@@ -165,7 +165,7 @@ if (isset($_SESSION['user'])) {
                 </div>
             </div>
         </div>
-    <?php elseif ($success === "3"): ?>
+    <?php elseif ($success === "3_course"): ?>
         <div class="toast-container">
             <div id="alert-box" class="toast toast-success">
                 <div class="toast-icon">
@@ -177,7 +177,7 @@ if (isset($_SESSION['user'])) {
                 </div>
             </div>
         </div>
-    <?php elseif ($success === "0"): ?>
+    <?php elseif ($success === "0_cours"): ?>
         <div class="toast-container">
             <div id="alert-box" class="toast toast-error">
                 <div class="toast-icon">
@@ -199,7 +199,7 @@ if (isset($_SESSION['user'])) {
                 </div>
                 <div class="toast-content">
                     <div class="toast-title">Success!</div>
-                    <div class="toast-message">you sign in successfully</div>
+                    <div class="toast-message">you log in successfully</div>
                 </div>
             </div>
         </div>
@@ -216,3 +216,53 @@ if (isset($_SESSION['user'])) {
             </div>
         </div>
     <?php endif; ?>
+
+    <?php if ($success === "1_section"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">Section created successfully</div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($success === "2_section"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">Section edited successfully</div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($success === "3_section"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">Section deleted successfully</div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($success === "0_section"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-error">
+            <div class="toast-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Error</div>
+                <div class="toast-message">Something went wrong</div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
