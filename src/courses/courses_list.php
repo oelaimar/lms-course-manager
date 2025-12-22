@@ -4,6 +4,25 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/assets/includes/header.php";
 $sql = "SELECT * FROM courses ORDER BY created_at DESC";
 $data = $conn->query($sql);
 $courses = $data->fetch_all(MYSQLI_ASSOC);
+
+
+$enrolledCourses = [];
+
+if ($isLoging) {
+
+    $userId = $_SESSION['user']['id'];
+
+    $enrollSql = "SELECT course_id FROM enrollments WHERE user_id = ?";
+    
+    $enrollStmt = $conn->prepare($enrollSql);
+    $enrollStmt->bind_param("i", $userId);
+    $enrollStmt->execute();
+    $enrollResult = $enrollStmt->get_result();
+    while ($row = $enrollResult->fetch_assoc()) {
+        $enrolledCourses[] = $row['course_id'];
+    }
+    $enrollStmt->close();
+}
 ?>
 
 <div id="coursesPage" class="page active">
@@ -19,9 +38,15 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
 
         <div class="courses-grid">
             <?php foreach ($courses as $course): ?>
+                <?php $isEnrolled = in_array($course['id'], $enrolledCourses); ?>
                 <div class="course-card" id="course-card-<?php echo $course["id"] ?>">
                     <div class="course-header">
                         <span class="badge badge-<?php echo strtolower($course["level"]) ?>"><?php echo $course["level"] ?></span>
+                        <?php if ($isEnrolled): ?>
+                            <span class="badge badge-success">
+                                <i class="fas fa-check"></i> Enrolled
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <h3 class="course-title"><?php echo $course["title"] ?></h3>
                     <p class="course-description">
@@ -47,16 +72,20 @@ $courses = $data->fetch_all(MYSQLI_ASSOC);
                     <div style="margin:15px;">
                         <p>created at <?php echo $course["created_at"] ?></p>
                     </div>
-                    <?php
-                    if ($isLoging) {
-                        echo
-                        "<form action='' action='POST'>
-                            <button class='btn btn-primary' type='submit'>
-                                enroll en this course
-                            </button>   
-                        </form>";
-                    }
-                    ?>
+                    <?php if ($isLoging && !$isEnrolled): ?>
+                        <form action="/enrollments/enroll.php" method="POST" style="margin-top: 10px;">
+                            <input type="hidden" name="course_id" value="<?php echo $course['id'] ?>">
+                            <button class="btn btn-primary" type="submit" style="width: 100%;">
+                                <i class="fas fa-user-plus"></i> Enroll in this Course
+                            </button>
+                        </form>
+                    <?php elseif ($isLoging && $isEnrolled): ?>
+                        <div style="margin-top: 10px; padding: 10px; background: #d1fae5; border-radius: 8px; text-align: center;">
+                            <span style="color: #065f46; font-weight: 600;">
+                                <i class="fas fa-check-circle"></i> You are enrolled in this course
+                            </span>
+                        </div>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>

@@ -266,3 +266,41 @@ if (isset($_SESSION['user'])) {
         </div>
     </div>
 <?php endif; ?>
+
+<?php if ($success === "1_enroll"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Success!</div>
+                <div class="toast-message">You have successfully enrolled in the course</div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($success === "2_enroll"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-warning">
+            <div class="toast-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Already Enrolled</div>
+                <div class="toast-message">You are already enrolled in this course</div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($success === "0_enroll"): ?>
+    <div class="toast-container">
+        <div id="alert-box" class="toast toast-error">
+            <div class="toast-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">Error</div>
+                <div class="toast-message">Failed to enroll in the course. Please try again.</div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
